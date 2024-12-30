@@ -1,0 +1,183 @@
+/* General reset and box-sizing */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body styling */
+body {
+  font-family: Arial, sans-serif;
+  background-color: #181818; /* Very dark background */
+  color: #e1e1e1; /* Light gray text for general content */
+  padding: 20px;
+}
+
+/* Container */
+.container {
+  flex-direction: column;
+  max-width: 100%;
+  margin: 20px auto;
+  background-color: #232323; /* Dark container background */
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5); /* More prominent shadow */
+}
+
+.tableContainer {
+  display: inline-block;
+  width:100%;
+}
+
+/* Heading styling */
+h1 {
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 2.5rem;
+  color: #f1f1f1; /* Light heading color */
+}
+
+/* Button styling */
+button {
+  font-weight: bold;
+  background-color: #4CAF50; /* Green button for general actions */
+  color: #000000;
+  border: none;
+  padding: 12px 24px;
+  cursor: pointer;
+  border-radius: 5px;
+  margin: 10px;
+  transition: 200ms;
+}
+.buttonAdd {
+  margin-left: 46%;
+  margin-right: 46%;
+  background-color: #4c8baf; /* Green button for general actions */
+  color: #000000;
+  border: none;
+  padding: 12px 24px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: 200ms;
+}
+button:hover{
+  background-color: #1b501e; /* Darker green on hover */
+  color: #ffffff;
+  transform: scale(110%);
+}
+
+.buttonAdd:hover {
+  background-color: rgb(90, 90, 193);
+  color: #ffffff;
+  transform: scale(110%); /* Slight scale-up effect */
+}
+
+/* Hidden class */
+.hidden {
+  display: none;
+}
+
+/* Form container */
+.form-container {
+  justify-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+/* Form inputs */
+form input, form select, form textarea {
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  padding: 12px;
+  margin: 10px 0;
+  background-color: #333333; /* Dark background for inputs */
+  color: #e1e1e1; /* Light text for input */
+  border: 1px solid #444444; /* Subtle borders */
+  border-radius: 5px;
+}
+
+/* Table styling */
+table {
+  width: 100%;
+  margin-top: 20px;
+  margin-bottom: 50px;
+  border-collapse: collapse;
+  text-align: center;
+}
+
+table th, table td {
+  padding: 16px;
+  border: 1px solid #444444; /* Subtle borders */
+}
+
+table th {
+  background-color: #2c2c2c; /* Darker background for table headers */
+  color: #ffffff; /* White text for headers */
+}
+
+table tr:nth-child(even) {
+  background-color: #333333; /* Even rows with slightly lighter background */
+}
+
+table tr:nth-child(odd) {
+  background-color: #282828; /* Odd rows with a slightly darker background */
+}
+
+table tr:hover {
+  background-color: #555555; /* Highlight row on hover */
+}
+
+.delete{
+  background-color: #ff4040; /* Red for delete buttons */
+  color: white;
+  padding: 6px 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.delete:hover {
+  background-color: #520208; /* Darker red on hover */
+}
+
+.edit {
+  background-color: #fbef1be3; /* Red for delete buttons */
+  color: rgb(0, 0, 0);
+  padding: 6px 12px;
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.edit:hover {
+  background-color: #535000ed; /* Darker red on hover */
+  color: #ffffff;
+}
+/* Heading for the Projects section */
+h2 {
+  padding: 10px;
+  margin-top: 30px;
+  color: #f1f1f1; /* White text for section heading */
+}
+
+h2:hover {
+  text-decoration:underline; /* Underlines the text on hover */
+}
+
+/* Responsive media query */
+@media (max-width: 600px) {
+  .container {
+    padding: 15px;
+  }
+
+  .form-container {
+    width: 100%;
+  }
+
+  table {
+    font-size: 14px; /* Smaller font size for mobile screens */
+  }
+}
