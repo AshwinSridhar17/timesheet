@@ -13,5 +13,8 @@
     "cors": "^2.8.5",
     "express": "^4.21.2",
     "pg": "^8.13.1"
+  },
+  "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.18.6"
   }
 }

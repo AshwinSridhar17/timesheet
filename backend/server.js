@@ -18,8 +18,6 @@ const pool = new Pool({
 app.use(cors());
 app.use(express.json()); // To parse JSON data
 
-// Routes
-
 // Get all projects
 app.get('/projects', async (req, res) => {
   try {
@@ -78,14 +76,43 @@ app.delete('/projects/:id', async (req, res) => {
     }
   });
 
-//   try {
-//     await pool.query('DELETE FROM projects WHERE id = $1', [id]);
-//     res.status(200).send('Project deleted');
-//   } catch (err) {
-//     console.error(err.message);
-//     res.status(500).send('Server error');
-//   }
+// Get all milestones
+app.get('/milestone', async (req, res) => {
+  try {
+    const result = await pool.query('SELECT milestone_id, project_id, milestone_name, start_date, end_date FROM milestones');
+    res.json(result.rows);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
 
+// Add new milestone
+app.post('/milestone', async (req, res) => {
+  const { project_id, milestone_name, start_date, end_date } = req.body;
+  try {
+    const result = await pool.query(
+      'INSERT INTO milestones (project_id, milestone_name, start_date, end_date) VALUES ($1, $2, $3, $4)',
+      [project_id, milestone_name, start_date, end_date]
+    );
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
+
+// Delete a milestone
+app.delete('/milestone/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query('DELETE FROM milestones WHERE milestone_id = $1', [id]);
+    res.json(result.rows[0]);
+  } catch (err) {
+    console.error(err.message);
+    res.status(500).send('Server error');
+  }
+});
 
 // Start the server
 app.listen(port, () => {

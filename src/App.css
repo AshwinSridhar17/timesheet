@@ -13,6 +13,24 @@ body {
   padding: 20px;
 }
 
+.topnav{
+  background-color: rgb(57, 57, 56);
+  color: white;
+  padding: 10px;
+  justify-content: space-between;
+  border-radius: 6px;
+}
+
+a {
+  color: white;
+  text-decoration: none;
+  padding: 10px
+}
+
+a:hover {
+  background-color: #4c4c4c;
+  text-decoration: underline;
+}
 /* Container */
 .container {
   flex-direction: column;
@@ -32,7 +50,7 @@ body {
 /* Heading styling */
 h1 {
   text-align: center;
-  margin-bottom: 20px;
+  margin: 20px;
   font-size: 2.5rem;
   color: #f1f1f1; /* Light heading color */
 }
@@ -40,7 +58,7 @@ h1 {
 /* Button styling */
 button {
   font-weight: bold;
-  background-color: #4CAF50; /* Green button for general actions */
+  background-color: #8f948f; /* Green button for general actions */
   color: #000000;
   border: none;
   padding: 12px 24px;
@@ -79,7 +97,6 @@ button:hover{
 
 /* Form container */
 .form-container {
-  justify-items: center;
   margin-top: 20px;
   margin-bottom: 20px;
 }

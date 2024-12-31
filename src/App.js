@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import "./App.css";
 import axios from "axios";
+import Milestones from "./Milestones"; // Assuming you have a Milestones component
 
 function App() {
   const [projects, setProjects] = useState([]);
@@ -36,8 +38,7 @@ function App() {
   const deleteProject = (id) => {
     const confirmDelete = window.confirm("Are you sure you want to delete this project?");
     if (confirmDelete) {
-      axios
-        .delete(`http://localhost:5000/projects/${id}`)
+      axios.delete(`http://localhost:5000/projects/${id}`)
         .then(() => {
           setProjects(projects.filter((project) => project.project_id !== id)); // Ensure the correct `id` is used here
         })
@@ -120,13 +121,44 @@ function App() {
   };
 
   return (
-    <div className="container">
-      <h1>Time-Sheet</h1>
-      <div>
-        <button className="buttonAdd" onClick={toggleFormVisibility}>
-          {formVisible ? "Close Tab" : "Add Project"}
-        </button>
+    <Router>
+      <div className="App">
+        <div className="topnav">
+        <nav>
+          <ul>
+              <Link to="/">Home</Link>
+              <Link to="/milestones">Milestones</Link>
+          </ul>
+        </nav>
+        </div>
+        <Routes>
+          <Route path="/" element={<Home 
+            projects={projects} s
+            formVisible={formVisible} 
+            toggleFormVisibility={toggleFormVisibility} 
+            handleSubmit={handleSubmit} 
+            handleInputChange={handleInputChange} 
+            formData={formData} 
+            editProject={editProject} 
+            deleteProject={deleteProject} 
+            formatDate={formatDate} 
+            cancelEdit={cancelEdit}
+            editingProject={editingProject}
+          />} />
+          <Route path="/milestones" element={<Milestones />} />
+        </Routes>
       </div>
+    </Router>
+  );
+}
+
+function Home({ projects, formVisible, toggleFormVisibility, handleSubmit, handleInputChange, formData, editProject, deleteProject, formatDate, cancelEdit, editingProject }) {
+  return (                                            
+    <div className="container">
+      <h2>Home</h2>
+      <button onClick={toggleFormVisibility}>
+        {formVisible ? "Hide Form" : "Add Project"}
+      </button>
       {formVisible && (
         <div className="form-container">
           <form onSubmit={handleSubmit}>
@@ -235,44 +267,37 @@ function App() {
         </div>
       )}
 
-      <h2>Projects</h2>
-      <div>
-        <table>
-          <thead>
-            <tr>
-              <th>Project Name</th>
-              <th>Client Name</th>
-              <th>Project Type</th>
-              <th>Start Date</th>
-              <th>End Date</th>
-              <th>Status</th>
-              <th>Description</th>
-              <th>Actions</th>
+      <table>
+        <thead>
+          <tr>
+            <th>Project Name</th>
+            <th>Client Name</th>
+            <th>Project Type</th>
+            <th>Start Date</th>
+            <th>End Date</th>
+            <th>Status</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          {projects.map((project) => (
+            <tr key={project.project_id}>
+              <td>{project.project_name}</td>
+              <td>{project.client_name}</td>
+              <td>{project.project_type}</td>
+              <td>{formatDate(project.project_start_date)}</td>
+              <td>{formatDate(project.project_expected_end_date)}</td>
+              <td>{project.project_status}</td>
+              <td>{project.description}</td>
+              <td>
+                <button onClick={() => editProject(project.project_id)}>Edit</button>
+                <button onClick={() => deleteProject(project.project_id)}>Delete</button>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {projects.map((project, index) => (
-              <tr key={project.project_id}>
-                <td style={{ maxWidth: '240px', wordWrap: 'break-word' }}>{project.project_name}</td>
-                <td>{project.client_name}</td>
-                <td>{project.project_type}</td>
-                <td>{formatDate(project.project_start_date)}</td>
-                <td>{formatDate(project.project_expected_end_date)}</td>
-                <td>{project.project_status}</td>
-                <td style={{ maxWidth: '240px', wordWrap: 'break-word' }}>{project.description}</td>
-                <td>
-                  <button className="edit" onClick={() => editProject(project.project_id)}>
-                    Edit
-                  </button>
-                  <button className="delete" onClick={() => deleteProject(project.project_id)}>
-                    Delete
-                  </button>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </div>
   );
 }
