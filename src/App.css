@@ -79,7 +79,7 @@ button {
   transition: 200ms;
 }
 button:hover{
-  background-color: #1b501e; /* Darker green on hover */
+  background-color: #8acbda; /* Darker green on hover */
   color: #ffffff;
   transform: scale(110%);
 }
